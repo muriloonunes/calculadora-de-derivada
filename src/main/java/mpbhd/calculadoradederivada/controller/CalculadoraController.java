@@ -28,8 +28,8 @@ public class CalculadoraController {
 
     @FXML
     private void initialize() {
-        labelErroDerivada.setVisible(false);
-        labelErroIntegral.setVisible(false);
+        alterarVisibilidade(labelErroDerivada);
+        alterarVisibilidade(labelErroIntegral);
     }
 
     @FXML
@@ -43,5 +43,9 @@ public class CalculadoraController {
     @FXML
     protected void onIntegralButtonClick() {
         System.out.println("Integral clicado");
+    }
+
+    private void alterarVisibilidade(Label label) {
+        label.setVisible(!label.isVisible());
     }
 }

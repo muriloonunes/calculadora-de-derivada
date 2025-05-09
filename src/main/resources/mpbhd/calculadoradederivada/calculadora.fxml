@@ -26,7 +26,7 @@
                               <TextField maxHeight="1.7976931348623157E308" styleClass="derivada-textfield" />
                            </children>
                         </VBox>
-                        <Button mnemonicParsing="false" styleClass="derivada-button">
+                        <Button mnemonicParsing="false" onAction="#onDerivadaButtonClick" styleClass="derivada-button">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -68,7 +68,7 @@
                               <TextField maxHeight="1.7976931348623157E308" styleClass="integral-textfield" />
                            </children>
                         </VBox>
-                        <Button mnemonicParsing="false" styleClass="integral-button">
+                        <Button mnemonicParsing="false" onAction="#onIntegralButtonClick" styleClass="integral-button">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
