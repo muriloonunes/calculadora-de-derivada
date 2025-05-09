@@ -1,0 +1,27 @@
+.root {
+    -derivada-primary: #aac7ff;
+    -derivada-on-primary: #0a305f;
+    -derivada-secondary: #bec6dc;
+    -derivada-on-secondary: #283141;
+    -derivada-primary-container: #284777;
+    -derivada-on-primary-container: #d6e3ff;
+    -derivada-secondary-container: #3e4759;
+    -derivada-on-secondary-container: #dae2f9;
+    -derivada-surface: #111318;
+    -derivada-on-surface: #e2e2e9;
+    -derivada-outline: #8e9099;
+
+    -integral-primary: #ffb4a6;
+    -integral-on-primary: #561e15;
+    -integral-secondary: #e7bdb5;
+    -integral-on-secondary: #442a25;
+    -integral-primary-container: #733429;
+    -integral-on-prinmary-container: #ffdad4;
+    -integral-secondary-container: #5d3f3a;
+    -integral-on-secondary-container: #ffdad4;
+    -integral-surface: #1a1110;
+    -integral-on-surface: #f1dfdb;
+    -integral-outline: #a08c89;
+
+    -erro: #ffb4ab;
+}

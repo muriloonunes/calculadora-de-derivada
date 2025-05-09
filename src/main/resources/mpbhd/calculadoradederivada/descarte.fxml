@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="500.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpbhd.calculadoradederivada.controller.CalculadoraController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <HBox alignment="CENTER" spacing="20.0">
+        <Label id="entradaLabel" fx:id="entradaLabel" text="Entrada" />
+        <TextField fx:id="entradaField" HBox.hgrow="ALWAYS" />
+    </HBox>
+    <HBox alignment="CENTER" spacing="20.0">
+        <Button id="derivadaButton" fx:id="derivadaButton" mnemonicParsing="false" onAction="#onDerivadaButtonClick" text="Derivada" />
+        <Button id="integralButton" fx:id="integralButton" mnemonicParsing="false" onAction="#onIntegralButtonClick" text="Integral" />
+    </HBox>
+    <HBox alignment="CENTER" spacing="20.0">
+        <Label fx:id="saidaLabel" text="Saída" />
+        <TextField fx:id="saidaField" editable="false" HBox.hgrow="ALWAYS" />
+    </HBox>
+</VBox>
