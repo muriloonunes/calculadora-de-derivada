@@ -3,11 +3,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -18,26 +18,32 @@
             <VBox spacing="15.0" styleClass="derivada-vbox-root">
                <children>
                   <Label styleClass="label-titulo-derivada" text="Calcular derivada" />
-                  <HBox alignment="BOTTOM_CENTER" spacing="10.0">
+                  <HBox alignment="BOTTOM_CENTER" spacing="10.0" styleClass="derivada-hbox-calcular">
                      <children>
                         <VBox HBox.hgrow="ALWAYS">
                            <children>
                               <Label styleClass="label-funcao-derivada" text="Função" />
-                              <TextField maxHeight="1.7976931348623157E308" styleClass="derivada-textfield" />
+                              <TextField fx:id="derivadaField" maxHeight="1.7976931348623157E308" styleClass="derivada-textfield" />
                            </children>
                         </VBox>
-                        <Button mnemonicParsing="false" onAction="#onDerivadaButtonClick" styleClass="derivada-button">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/seta_derivada.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic></Button>
+                        <Button fx:id="derivadaButton" mnemonicParsing="false" onAction="#onDerivadaButtonClick" styleClass="derivada-button" text="Calcular" />
                      </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
                   </HBox>
                   <Label fx:id="labelErroDerivada" styleClass="label-erro" text="Erro" />
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" styleClass="derivada-resposta-vbox">
+                  <HBox alignment="CENTER" spacing="15.0" visible="false">
+                     <children>
+                        <RadioButton mnemonicParsing="false" text="Definida">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="tipoFuncaoGroup1" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" text="Indefinida" toggleGroup="$tipoFuncaoGroup1" />
+                     </children>
+                  </HBox>
+                  <VBox prefWidth="100.0" spacing="15.0" styleClass="derivada-resposta-vbox" VBox.vgrow="ALWAYS">
                      <children>
                         <Label styleClass="label-resposta-derivada" text="x' = 3x² + 5" />
                         <Label layoutX="10.0" layoutY="10.0" styleClass="label-resposta-derivada" text="x'' = 6x" />
@@ -60,27 +66,32 @@
             <VBox spacing="15.0" styleClass="integral-vbox-root">
                <children>
                   <Label styleClass="label-titulo-integral" text="Calcular integral" />
-                  <HBox alignment="BOTTOM_CENTER" spacing="10.0">
+                  <HBox alignment="BOTTOM_CENTER" spacing="10.0" styleClass="integral-hbox-calcular">
                      <children>
                         <VBox HBox.hgrow="ALWAYS">
                            <children>
                               <Label styleClass="label-funcao-integral" text="Função" />
-                              <TextField maxHeight="1.7976931348623157E308" styleClass="integral-textfield" />
+                              <TextField fx:id="integralField" maxHeight="1.7976931348623157E308" styleClass="integral-textfield" />
                            </children>
                         </VBox>
-                        <Button mnemonicParsing="false" onAction="#onIntegralButtonClick" styleClass="integral-button">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/seta_integral.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <Button fx:id="integralButton" mnemonicParsing="false" onAction="#onIntegralButtonClick" styleClass="integral-button" text="Calcular" />
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" styleClass="integral-rbutton" text="Definida">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="tipoFuncaoGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" styleClass="integral-rbutton" text="Indefinida" toggleGroup="$tipoFuncaoGroup" />
                      </children>
                   </HBox>
                   <Label fx:id="labelErroIntegral" styleClass="label-erro" text="Erro" />
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" styleClass="integral-resposta-vbox">
+                  <VBox prefWidth="100.0" spacing="15.0" styleClass="integral-resposta-vbox" VBox.vgrow="ALWAYS">
                      <children>
                         <Label styleClass="label-resposta-integral" text="x' = 3x² + 5" />
                         <Label styleClass="label-resposta-integral" text="x'' = 6x" />

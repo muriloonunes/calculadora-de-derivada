@@ -10,112 +10,139 @@
 
 .label {
     -fx-font-family: 'Roboto';
+    -fx-text-fill: white;
 }
 
 .label-titulo-integral {
-    -fx-text-fill: -integral-on-surface;
     -fx-font-size: 18;
 }
 
 .label-titulo-derivada {
-    -fx-text-fill: -derivada-on-surface;
     -fx-font-size: 18;
 }
 
-.label-funcao-derivada {
-    -fx-text-fill: -derivada-on-surface;
+.derivada-hbox-calcular {
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-border-color: -derivada-default-gradient;
 }
 
-.label-funcao-integral {
-    -fx-text-fill: -integral-on-surface;
+.integral-hbox-calcular {
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-border-color: -integral-default-gradient;
 }
 
 .derivada-textfield {
-    -fx-border-color: -derivada-outline;
+    -fx-background-color: transparent;
+    -fx-border-color: -derivada-text-field-blue;
 }
 
 .derivada-textfield:focused {
-    -fx-border-color: -derivada-primary;
+    -fx-border-color: -derivada-default-blue;
 }
 
 .text-field {
-    -fx-background-radius: 9;
-    -fx-border-radius: 9;
-    -fx-border-width: 2;
-}
-
-.integral-textfield {
-    -fx-border-color: -integral-outline;
-}
-
-.integral-textfield:focused {
-    -fx-border-color: -integral-primary;
-}
-
-.derivada-button {
-    -fx-background-color: -derivada-primary;
-    -fx-background-radius: 25;
-    -fx-border-radius: 25;
+    -fx-text-fill: white;
+    -fx-border-radius: 4;
     -fx-border-width: 1;
 }
 
+.integral-textfield {
+    -fx-background-color: transparent;
+    -fx-border-color: -integral-text-field-red;
+}
+
+.integral-textfield:focused {
+    -fx-border-color: -integral-default-red;
+}
+
+.derivada-button {
+    -fx-background-color: transparent;
+    -fx-border-radius: 4;
+    -fx-border-color: -derivada-button-gradient;
+    -fx-border-width: 1;
+}
+
+.button > .text {
+    -fx-fill: white;
+}
+
+.button:hover {
+    -fx-cursor: hand;
+}
+
 .derivada-button:hover {
-    -fx-background-color: #a4baea;
+    -fx-background-color: -derivada-button-gradient;
 }
 
 .derivada-button:pressed {
-    -fx-background-color: #94a8d3;
+    -fx-background-color: linear-gradient(to right, rgba(7, 209, 244, 0.8), rgba(0, 142, 167, 0.8));
 }
 
 .integral-button {
-    -fx-background-color: -integral-primary;
-    -fx-background-radius: 25;
-    -fx-border-radius: 25;
+    -fx-background-color: transparent;
+    -fx-border-radius: 4;
+    -fx-border-color: -integral-button-gradient;
     -fx-border-width: 1;
 }
 
 .integral-button:hover {
-    -fx-background-color: #e3a79c;
+    -fx-background-color: -integral-button-gradient;
 }
 
 .integral-button:pressed {
-    -fx-background-color: #cc958c;
+    -fx-background-color: linear-gradient(to right, rgba(233, 163, 0, 0.8), rgba(167, 117, 0, 0.8));
 }
 
 .derivada-resposta-vbox {
-    -fx-background-color: -derivada-secondary-container;
-    -fx-border-color: -derivada-outline;
-    -fx-background-radius: 6;
-    -fx-border-radius: 6;
-    -fx-border-width: 1;
+    -fx-background-color: transparent;
+    -fx-border-color: -derivada-default-gradient;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
 }
 
 .label-resposta-derivada {
-    -fx-text-fill: -derivada-on-secondary-container;
     -fx-font-size: 20;
 }
 
 .label-resposta-integral {
-    -fx-text-fill: -integral-on-secondary-container;
     -fx-font-size: 20;
 }
 
 .integral-resposta-vbox {
-    -fx-background-color: -integral-secondary-container;
-    -fx-border-color: -integral-outline;
-    -fx-background-radius: 6;
-    -fx-border-radius: 6;
-    -fx-border-width: 1;
+    -fx-background-color: transparent;
+    -fx-border-color: -integral-default-gradient;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
 }
 
 .label-erro {
-    -fx-text-fill: -erro;
+    -fx-text-fill: red;
+}
+
+.integral-rbutton > .text {
+    -fx-fill: white;
+}
+
+.integral-rbutton > .radio {
+    -fx-background-color: transparent;
+    -fx-border-color: white;
+    -fx-border-radius: 10;
+}
+
+.integral-rbutton > .radio:hover {
+    -fx-cursor: hand;
+}
+
+.integral-rbutton:selected > .radio > .dot {
+    -fx-background-color: -integral-default-red;
 }
 
 .tab-pane > .tab-header-area > .tab-header-background {
-    -fx-background-color: #404043;
+    -fx-background-color: #161214;
 }
 
 .tab-pane > .tab-header-area > .headers-region > .tab {
-    -fx-background-color: #96969f;
+    -fx-background-color: white;
 }
