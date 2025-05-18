@@ -11,8 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import org.matheclipse.core.eval.ExprEvaluator;
-import org.matheclipse.core.interfaces.IExpr;
+import mpbhd.calculadoradederivada.model.CalculadoraModel;
 
 public class CalculadoraController {
     @FXML
@@ -30,26 +29,70 @@ public class CalculadoraController {
     @FXML
     private TabPane tabPainel;
 
+    CalculadoraModel calculadoraModel;
+
     @FXML
     private void initialize() {
         alterarVisibilidade(labelErroDerivada);
         alterarVisibilidade(labelErroIntegral);
+        calculadoraModel = new CalculadoraModel();
     }
 
     @FXML
     protected void onDerivadaButtonClick() {
         animarCliqueBotao(Color.CYAN, derivadaButton);
+
         System.out.println("Derivada clicado");
-        ExprEvaluator util = new ExprEvaluator();
-        IExpr result = util.evaluate("D(x^2 + 3*x, x)");  // Derivada de x^2 + 3x
-        System.out.println("Derivada: " + result);
+
+        String expressaoD = derivadaField.getText();
+
+        if (expressaoD.isEmpty() || expressaoD.equals(" ")) {
+            labelErroDerivada.setVisible(true);
+            labelErroDerivada.setText("Campo vazio");
+            return;
+        }
+
+        try {
+            String primeira = calculadoraModel.calcularPrimeiraDerivada(expressaoD);
+            String segunda = calculadoraModel.calcularSegundaDerivada(expressaoD);
+
+            saidaLabel.setText("Primeira ordem: " + primeira + "\n" + "Segunda ordem: " + segunda);
+            labelErroDerivada.setVisible(false);
+
+        } catch (Exception e) {
+            System.out.println("Erro ao calcular a derivada: " + e.getMessage());
+            labelErroDerivada.setVisible(true);
+            labelErroDerivada.setText("Erro ao calcular a derivada: " + e.getMessage());
+        }
     }
 
     @FXML
     protected void onIntegralButtonClick() {
         animarCliqueBotao(Color.GOLDENROD, integralButton);
+
         System.out.println("Integral clicado");
+
+        String expressaoI = integralField.getText();
+
+        if (expressaoI.isEmpty() || expressaoI.equals(" ")) {
+            labelErroIntegral.setVisible(true);
+            labelErroIntegral.setText("Campo vazio");
+            return;
+        }
+
+        try{
+            String integral = calculadoraModel.calcularIntegral(expressaoI);
+
+            saidaLabel.setText("Integral: " + integral);
+            labelErroIntegral.setVisible(false);
+        } catch (Exception e) {
+            System.out.println("Erro ao calcular a integral: " + e.getMessage());
+            labelErroIntegral.setVisible(true);
+            labelErroIntegral.setText("Erro ao calcular a integral: " + e.getMessage());
+        }
     }
+
+    public void mostrarErro(){}
 
     private void alterarVisibilidade(Label label) {
         label.setVisible(!label.isVisible());
