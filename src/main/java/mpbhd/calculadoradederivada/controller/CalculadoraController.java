@@ -72,27 +72,27 @@ public class CalculadoraController {
 
         System.out.println("Integral clicado");
 
-        String expressaoI = integralField.getText();
+        String expressao = integralField.getText().trim();
 
-        if (expressaoI.isEmpty() || expressaoI.equals(" ")) {
-            labelErroIntegral.setVisible(true);
-            labelErroIntegral.setText("Campo vazio");
+        if (expressao.isEmpty() || expressao.equals(" ")) {
+            mostrarErro(labelErroIntegral, "Campo vazio.");
             return;
         }
 
-        try{
-            String integral = calculadoraModel.calcularIntegral(expressaoI);
-
-            saidaLabel.setText("Integral: " + integral);
+        try {
+            String resultado = calculadoraModel.calcularIntegral(expressao);
+            saidaLabel.setText("Integral: " + resultado);
             labelErroIntegral.setVisible(false);
         } catch (Exception e) {
-            System.out.println("Erro ao calcular a integral: " + e.getMessage());
-            labelErroIntegral.setVisible(true);
-            labelErroIntegral.setText("Erro ao calcular a integral: " + e.getMessage());
+            mostrarErro(labelErroIntegral, e.getMessage());
         }
+
     }
 
-    public void mostrarErro(){}
+    private void mostrarErro(Label label, String mensagem) {
+        label.setText(mensagem);
+        label.setVisible(true);
+    }
 
     private void alterarVisibilidade(Label label) {
         label.setVisible(!label.isVisible());

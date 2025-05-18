@@ -5,27 +5,27 @@ import org.matheclipse.core.interfaces.IExpr;
 
 public class CalculadoraModel {
 
-    public String calcularPrimeiraDerivada(String expressao) {
-        ExprEvaluator util = new ExprEvaluator();
+    private final ExprEvaluator evaluator = new ExprEvaluator();
 
-        IExpr primeira = util.evaluate("D(" + expressao + ", x)");
-        System.out.println("Derivada: " + primeira);
-        return primeira.toString();
+    public String calcularPrimeiraDerivada(String expressao) {
+        return avaliarExpressao("D(" + expressao + ", x)");
     }
 
     public String calcularSegundaDerivada(String expressao) {
-        ExprEvaluator util = new ExprEvaluator();
-
-        IExpr segunda = util.evaluate("D(" + expressao + ", {x, 2})");
-        System.out.println("Derivada: " + segunda);
-        return segunda.toString();
+        return avaliarExpressao("D(" + expressao + ", {x, 2})");
     }
 
     public String calcularIntegral(String expressao) {
-        ExprEvaluator util = new ExprEvaluator();
-
-        IExpr integral = util.evaluate("Integrate(" + expressao + ", x)");
-        System.out.println("Integral: " + integral);
-        return integral.toString();
+        return avaliarExpressao("Integrate(" + expressao + ", x)");
     }
+
+    private String avaliarExpressao(String entrada) {
+        try {
+            IExpr resultado = evaluator.evaluate(entrada);
+            return resultado.toString();
+        } catch (Exception e) {
+            throw new RuntimeException("Expressão inválida.");
+        }
+    }
+
 }
