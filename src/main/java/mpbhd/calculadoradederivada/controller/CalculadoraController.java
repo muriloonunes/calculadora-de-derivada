@@ -38,6 +38,7 @@ public class CalculadoraController {
         calculadoraModel = new CalculadoraModel();
     }
 
+
     @FXML
     protected void onDerivadaButtonClick() {
         animarCliqueBotao(Color.CYAN, derivadaButton);

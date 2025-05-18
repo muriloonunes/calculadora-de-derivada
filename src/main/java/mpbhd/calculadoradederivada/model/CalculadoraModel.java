@@ -27,5 +27,4 @@ public class CalculadoraModel {
             throw new RuntimeException("Expressão inválida.");
         }
     }
-
 }
