@@ -45,8 +45,8 @@
                   </HBox>
                   <VBox prefWidth="100.0" spacing="15.0" styleClass="derivada-resposta-vbox" VBox.vgrow="ALWAYS">
                      <children>
-                        <Label styleClass="label-resposta-derivada" text="x' = 3x² + 5" />
-                        <Label layoutX="10.0" layoutY="10.0" styleClass="label-resposta-derivada" text="x'' = 6x" />
+                        <Label fx:id="derivadaSaidaPrimeiraOrdem" styleClass="label-resposta-derivada" text="x' = 3x² + 5" />
+                        <Label fx:id="derivadaSaidaSegundaOrdem" layoutX="10.0" layoutY="10.0" styleClass="label-resposta-derivada" text="x'' = 6x" />
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -93,8 +93,8 @@
                   <Label fx:id="labelErroIntegral" styleClass="label-erro" text="Erro" />
                   <VBox prefWidth="100.0" spacing="15.0" styleClass="integral-resposta-vbox" VBox.vgrow="ALWAYS">
                      <children>
-                        <Label styleClass="label-resposta-integral" text="x' = 3x² + 5" />
-                        <Label styleClass="label-resposta-integral" text="x'' = 6x" />
+                        <Label fx:id="integralSaidaPrimeiraOrdem" styleClass="label-resposta-integral" text="x' = 3x² + 5" />
+                        <Label fx:id="integralSaidaSegundaOrdem" styleClass="label-resposta-integral" text="x'' = 6x" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

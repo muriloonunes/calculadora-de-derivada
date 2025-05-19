@@ -15,9 +15,6 @@ import mpbhd.calculadoradederivada.model.CalculadoraModel;
 
 public class CalculadoraController {
     @FXML
-    private Label entradaLabel, saidaLabel;
-
-    @FXML
     private Label labelErroDerivada, labelErroIntegral;
 
     @FXML
@@ -27,17 +24,20 @@ public class CalculadoraController {
     private TextField derivadaField, integralField;
 
     @FXML
-    private TabPane tabPainel;
+    private Label derivadaSaidaPrimeiraOrdem, derivadaSaidaSegundaOrdem;
+
+    @FXML
+    private Label integralSaidaPrimeiraOrdem, integralSaidaSegundaOrdem;
 
     CalculadoraModel calculadoraModel;
 
     @FXML
     private void initialize() {
+        //hartur viado do caralho
         alterarVisibilidade(labelErroDerivada);
         alterarVisibilidade(labelErroIntegral);
         calculadoraModel = new CalculadoraModel();
     }
-
 
     @FXML
     protected void onDerivadaButtonClick() {
@@ -57,7 +57,7 @@ public class CalculadoraController {
             String primeira = calculadoraModel.calcularPrimeiraDerivada(expressaoD);
             String segunda = calculadoraModel.calcularSegundaDerivada(expressaoD);
 
-            saidaLabel.setText("Primeira ordem: " + primeira + "\n" + "Segunda ordem: " + segunda);
+//            saidaLabel.setText("Primeira ordem: " + primeira + "\n" + "Segunda ordem: " + segunda);
             labelErroDerivada.setVisible(false);
 
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class CalculadoraController {
 
         try {
             String resultado = calculadoraModel.calcularIntegral(expressao);
-            saidaLabel.setText("Integral: " + resultado);
+//            saidaLabel.setText("Integral: " + resultado);
             labelErroIntegral.setVisible(false);
         } catch (Exception e) {
             mostrarErro(labelErroIntegral, e.getMessage());
