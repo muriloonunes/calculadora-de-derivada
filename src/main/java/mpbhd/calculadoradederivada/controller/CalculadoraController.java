@@ -58,6 +58,10 @@ public class CalculadoraController {
             String segunda = calculadoraModel.calcularSegundaDerivada(expressaoD);
 
 //            saidaLabel.setText("Primeira ordem: " + primeira + "\n" + "Segunda ordem: " + segunda);
+
+            derivadaSaidaPrimeiraOrdem.setText("1ª Derivada: " + primeira);
+            derivadaSaidaSegundaOrdem.setText("2ª Derivada: " + segunda);
+
             labelErroDerivada.setVisible(false);
 
         } catch (Exception e) {
@@ -83,6 +87,9 @@ public class CalculadoraController {
         try {
             String resultado = calculadoraModel.calcularIntegral(expressao);
 //            saidaLabel.setText("Integral: " + resultado);
+
+            integralSaidaPrimeiraOrdem.setText("Integral: " + resultado + " + C");
+
             labelErroIntegral.setVisible(false);
         } catch (Exception e) {
             mostrarErro(labelErroIntegral, e.getMessage());

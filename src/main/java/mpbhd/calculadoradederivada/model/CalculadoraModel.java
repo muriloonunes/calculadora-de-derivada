@@ -24,7 +24,7 @@ public class CalculadoraModel {
             IExpr resultado = evaluator.evaluate(entrada);
             return resultado.toString();
         } catch (Exception e) {
-            throw new RuntimeException("Expressão inválida.");
+            throw new RuntimeException("Expressão inválida. Use apenas letras, números e operadores matemáticos como + - * / ^.");
         }
     }
 }
