@@ -88,7 +88,8 @@ public class CalculadoraController {
             String resultado = calculadoraModel.calcularIntegral(expressao);
 //            saidaLabel.setText("Integral: " + resultado);
 
-            integralSaidaPrimeiraOrdem.setText("Integral: " + resultado + " + C");
+            integralSaidaPrimeiraOrdem.setText("Integral: " + resultado );
+            //todo conferir o uso do +C
 
             labelErroIntegral.setVisible(false);
         } catch (Exception e) {
