@@ -33,6 +33,12 @@
     -fx-border-color: -integral-default-gradient;
 }
 
+.integral-hbox-limites {
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-border-color: -integral-default-gradient;
+}
+
 .derivada-textfield {
     -fx-background-color: transparent;
     -fx-border-color: -derivada-text-field-blue;

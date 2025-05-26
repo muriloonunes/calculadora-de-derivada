@@ -4,11 +4,9 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import mpbhd.calculadoradederivada.model.CalculadoraModel;
@@ -29,19 +27,31 @@ public class CalculadoraController {
     @FXML
     private Label integralSaidaPrimeiraOrdem, integralSaidaSegundaOrdem;
 
+    @FXML private HBox limitesHbox;
+
+    @FXML private RadioButton definidaRButton, indefinidaRButton;
+
     CalculadoraModel calculadoraModel;
 
     @FXML
     private void initialize() {
         //hartur viado do caralho
-        alterarVisibilidade(labelErroDerivada);
-        alterarVisibilidade(labelErroIntegral);
+        labelErroDerivada.setVisible(false);
+        labelErroIntegral.setVisible(false);
+        derivadaSaidaPrimeiraOrdem.setVisible(false);
+        derivadaSaidaSegundaOrdem.setVisible(false);
+        integralSaidaPrimeiraOrdem.setVisible(false);
+        integralSaidaSegundaOrdem.setVisible(false);
         integralSaidaSegundaOrdem.setText("");
+        definidaRButton.setOnAction(e -> radioClicado(true));
+        indefinidaRButton.setOnAction(e -> radioClicado(false));
         calculadoraModel = new CalculadoraModel();
     }
 
     @FXML
     protected void onDerivadaButtonClick() {
+        derivadaSaidaPrimeiraOrdem.setVisible(true);
+        derivadaSaidaSegundaOrdem.setVisible(true);
         animarCliqueBotao(Color.CYAN, derivadaButton);
 
         System.out.println("Derivada clicado");
@@ -61,13 +71,12 @@ public class CalculadoraController {
             String primeira = calculadoraModel.calcularPrimeiraDerivada(expressaoD);
             String segunda = calculadoraModel.calcularSegundaDerivada(expressaoD);
 
-//            saidaLabel.setText("Primeira ordem: " + primeira + "\n" + "Segunda ordem: " + segunda);
-
-            derivadaSaidaPrimeiraOrdem.setText("1ª Derivada: " + primeira);
-            derivadaSaidaSegundaOrdem.setText("2ª Derivada: " + segunda);
+            derivadaSaidaPrimeiraOrdem.setVisible(true);
+            derivadaSaidaSegundaOrdem.setVisible(true);
+            derivadaSaidaPrimeiraOrdem.setText("x' = " + primeira);
+            derivadaSaidaSegundaOrdem.setText("x'' = " + segunda);
 
             labelErroDerivada.setVisible(false);
-
         } catch (Exception e) {
             System.out.println("Erro ao calcular a derivada: " + e.getMessage());
             labelErroDerivada.setVisible(true);
@@ -77,6 +86,8 @@ public class CalculadoraController {
 
     @FXML
     protected void onIntegralButtonClick() {
+        integralSaidaPrimeiraOrdem.setVisible(false);
+        integralSaidaSegundaOrdem.setVisible(false);
         animarCliqueBotao(Color.GOLDENROD, integralButton);
 
         System.out.println("Integral clicado");
@@ -92,8 +103,9 @@ public class CalculadoraController {
 
         try {
             String resultado = calculadoraModel.calcularIntegralIndef(expressao);
-//            saidaLabel.setText("Integral: " + resultado);
 
+            integralSaidaPrimeiraOrdem.setVisible(true);
+            integralSaidaSegundaOrdem.setVisible(true);
             integralSaidaPrimeiraOrdem.setText("Integral: " + resultado);
             //todo conferir o uso do +C
 
@@ -104,13 +116,12 @@ public class CalculadoraController {
 
     }
 
-    private void mostrarErro(Label label, String mensagem) {
-        label.setText(mensagem);
-        label.setVisible(true);
+    private void radioClicado(boolean showLimites) {
+        limitesHbox.setVisible(showLimites);
     }
 
-    private void alterarVisibilidade(Label label) {
-        label.setVisible(!label.isVisible());
+    private void mostrarErro(Label label, String mensagem) {
+        label.setText(mensagem);
     }
 
     private void animarCliqueBotao(Color cor, Button botao) {
