@@ -36,6 +36,7 @@ public class CalculadoraController {
         //hartur viado do caralho
         alterarVisibilidade(labelErroDerivada);
         alterarVisibilidade(labelErroIntegral);
+        integralSaidaSegundaOrdem.setText("");
         calculadoraModel = new CalculadoraModel();
     }
 
@@ -52,6 +53,9 @@ public class CalculadoraController {
             labelErroDerivada.setText("Campo vazio");
             return;
         }
+
+        // "A calculadora tem q fazer derivada implícita (mas não vou cobrar trigonométricas, logarítmicas, ..., somente polinomiais)
+        // e integral definida/indefinida"
 
         try {
             String primeira = calculadoraModel.calcularPrimeiraDerivada(expressaoD);
@@ -84,11 +88,13 @@ public class CalculadoraController {
             return;
         }
 
+        //todo fazer a diferenciação se é definida ou indef
+
         try {
-            String resultado = calculadoraModel.calcularIntegral(expressao);
+            String resultado = calculadoraModel.calcularIntegralIndef(expressao);
 //            saidaLabel.setText("Integral: " + resultado);
 
-            integralSaidaPrimeiraOrdem.setText("Integral: " + resultado );
+            integralSaidaPrimeiraOrdem.setText("Integral: " + resultado);
             //todo conferir o uso do +C
 
             labelErroIntegral.setVisible(false);
