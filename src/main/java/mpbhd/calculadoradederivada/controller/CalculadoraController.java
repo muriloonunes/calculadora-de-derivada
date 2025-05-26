@@ -99,7 +99,29 @@ public class CalculadoraController {
             return;
         }
 
-        //todo fazer a diferenciação se é definida ou indef
+        if (!definidaRButton.isSelected() && !indefinidaRButton.isSelected()) {
+            mostrarErro(labelErroIntegral, "Selecione o tipo de integral (definida ou indefinida).");
+            return;
+        }
+
+        //todo fazer a diferenciação se é definida ou indefinida
+//        if (definidaRButton.isSelected()) {
+//            // Pegar valores dos TextFields de limites
+//            String limiteInferior = /* ex: limiteInferiorField.getText().trim() */;
+//            String limiteSuperior = /* ex: limiteSuperiorField.getText().trim() */;
+//
+//            if (limiteInferior.isEmpty() || limiteSuperior.isEmpty()) {
+//                mostrarErro(labelErroIntegral, "Preencha os limites inferior e superior.");
+//                return;
+//            }
+//
+//            String resultado = calculadoraModel.calcularIntegralDefinida(expressao, limiteInferior, limiteSuperior);
+//            integralSaidaPrimeiraOrdem.setText("∫ definida = " + resultado);
+//        } else {
+//            String resultado = calculadoraModel.calcularIntegralIndef(expressao);
+//            integralSaidaPrimeiraOrdem.setText("∫ indefinida = " + resultado + " + C");
+//        }
+
 
         try {
             String resultado = calculadoraModel.calcularIntegralIndef(expressao);

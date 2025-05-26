@@ -27,25 +27,14 @@ public class CalculadoraModel {
 //        }
 //    }
 
-
-//    public String calcularDerivadaImplicita(String expressao) {
-//        try {
-//            String derivada = "D(" + expressao + ", x)";
-//            String solucao = "Solve(" + derivada + " == 0, D(y, x))";
-//            return avaliarExpressao(solucao);
-//        } catch (Exception e) {
-//            throw new RuntimeException("Erro ao calcular derivada implícita.");
-//        }
-//    }
-
     public String calcularIntegralIndef(String expressao) {
         return avaliarExpressao("Integrate(" + expressao + ", x)");
     }
 
-    //public String calcularIntegralDefinida(String expressao, String limiteInferior, String limiteSuperior) {
-    //    return avaliarExpressao("Integrate(" + expressao + ", {x, " + limiteInferior + ", " + limiteSuperior + "})");
-    //}
-    //
+    public String calcularIntegralDefinida(String expressao, String limiteInferior, String limiteSuperior) {
+        return avaliarExpressao("Integrate(" + expressao + ", {x, " + limiteInferior + ", " + limiteSuperior + "})");
+    }
+
     //public String calcularDerivadaImplicita(String expressao) {
     //    try {
     //        String derivada = "Solve(D(" + expressao + ", x) + D(" + expressao + ", y)*D(y, x) == 0, D(y, x))";
