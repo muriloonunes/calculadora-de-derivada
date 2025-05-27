@@ -41,7 +41,6 @@ public class CalculadoraController {
 
     @FXML
     private void initialize() {
-        //hartur viado do caralho
         labelErroDerivada.setVisible(false);
         labelErroIntegral.setVisible(false);
         derivadaSaidaPrimeiraOrdem.setVisible(false);
@@ -70,6 +69,7 @@ public class CalculadoraController {
             return;
         }
 
+        //aspas do professor ujeverson
         // "A calculadora tem q fazer derivada implícita (mas não vou cobrar trigonométricas, logarítmicas, ..., somente polinomiais)
         // e integral definida/indefinida"
 
@@ -101,11 +101,9 @@ public class CalculadoraController {
         integralSaidaSegundaOrdem.setVisible(false);
         animarCliqueBotao(Color.GOLDENROD, integralButton);
 
-        System.out.println("Integral clicado");
-
         String expressao = integralField.getText().trim();
 
-        if (expressao.isEmpty() || expressao.equals(" ")) {
+        if (expressao.isEmpty()) {
             mostrarErro(labelErroIntegral, "Campo vazio.");
             return;
         }
@@ -115,38 +113,31 @@ public class CalculadoraController {
             return;
         }
 
-        //todo fazer a diferenciação se é definida ou indefinida
-//        if (definidaRButton.isSelected()) {
-//            // Pegar valores dos TextFields de limites
-//            String limiteInferior = /* ex: limiteInferiorField.getText().trim() */;
-//            String limiteSuperior = /* ex: limiteSuperiorField.getText().trim() */;
-//
-//            if (limiteInferior.isEmpty() || limiteSuperior.isEmpty()) {
-//                mostrarErro(labelErroIntegral, "Preencha os limites inferior e superior.");
-//                return;
-//            }
-//
-//            String resultado = calculadoraModel.calcularIntegralDefinida(expressao, limiteInferior, limiteSuperior);
-//            integralSaidaPrimeiraOrdem.setText("∫ definida = " + resultado);
-//        } else {
-//            String resultado = calculadoraModel.calcularIntegralIndef(expressao);
-//            integralSaidaPrimeiraOrdem.setText("∫ indefinida = " + resultado + " + C");
-//        }
-
-
         try {
-            String resultado = calculadoraModel.calcularIntegralIndef(expressao);
+            String resultado;
+
+            if (definidaRButton.isSelected()) {
+                String limiteInferior = limInferiorField.getText().trim();
+                String limiteSuperior = limSuperiorField.getText().trim();
+
+                if (limiteInferior.isEmpty() || limiteSuperior.isEmpty()) {
+                    mostrarErro(labelErroIntegral, "Preencha os limites inferior e superior.");
+                    return;
+                }
+
+                resultado = calculadoraModel.calcularIntegralDefinida(expressao, limiteInferior, limiteSuperior);
+                integralSaidaPrimeiraOrdem.setText("∫ definida = " + resultado);
+            } else {
+                resultado = calculadoraModel.calcularIntegralIndef(expressao);
+                integralSaidaPrimeiraOrdem.setText("∫ indefinida = " + resultado + " + C");
+            }
 
             integralSaidaPrimeiraOrdem.setVisible(true);
-            integralSaidaSegundaOrdem.setVisible(true);
-            integralSaidaPrimeiraOrdem.setText("Integral: " + resultado);
-            //todo conferir o uso do +C
-
+            integralSaidaSegundaOrdem.setVisible(false);
             labelErroIntegral.setVisible(false);
         } catch (Exception e) {
-            mostrarErro(labelErroIntegral, e.getMessage());
+            mostrarErro(labelErroIntegral, "Erro: " + e.getMessage());
         }
-
     }
 
     private void radioClicado(boolean showLimites) {

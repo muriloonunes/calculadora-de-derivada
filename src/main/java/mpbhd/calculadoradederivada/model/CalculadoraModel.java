@@ -4,7 +4,6 @@ import org.matheclipse.core.eval.ExprEvaluator;
 import org.matheclipse.core.interfaces.IExpr;
 
 public class CalculadoraModel {
-
     private final ExprEvaluator evaluator = new ExprEvaluator();
 
     public String calcularPrimeiraDerivada(String expressao) {
@@ -14,8 +13,6 @@ public class CalculadoraModel {
     public String calcularSegundaDerivada(String expressao) {
         return avaliarExpressao("D(" + expressao + ", {x, 2})");
     }
-
-    //todo implementar as frescuragens do ujeverson
 
 //    public String calcularDerivadaImplicita(String expressao) {
 //        try {
@@ -27,14 +24,6 @@ public class CalculadoraModel {
 //        }
 //    }
 
-    public String calcularIntegralIndef(String expressao) {
-        return avaliarExpressao("Integrate(" + expressao + ", x)");
-    }
-
-    public String calcularIntegralDefinida(String expressao, String limiteInferior, String limiteSuperior) {
-        return avaliarExpressao("Integrate(" + expressao + ", {x, " + limiteInferior + ", " + limiteSuperior + "})");
-    }
-
     //public String calcularDerivadaImplicita(String expressao) {
     //    try {
     //        String derivada = "Solve(D(" + expressao + ", x) + D(" + expressao + ", y)*D(y, x) == 0, D(y, x))";
@@ -43,6 +32,14 @@ public class CalculadoraModel {
     //        throw new RuntimeException("Erro ao calcular derivada implícita: " + e.getMessage());
     //    }
     //}
+
+    public String calcularIntegralIndef(String expressao) {
+        return avaliarExpressao("Integrate(" + expressao + ", x)");
+    }
+
+    public String calcularIntegralDefinida(String expressao, String limiteInferior, String limiteSuperior) {
+        return avaliarExpressao("Integrate(" + expressao + ", {x, " + limiteInferior + ", " + limiteSuperior + "})");
+    }
 
     private String avaliarExpressao(String entrada) {
         try {
