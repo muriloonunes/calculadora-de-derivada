@@ -4,7 +4,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -12,6 +15,9 @@ import javafx.util.Duration;
 import mpbhd.calculadoradederivada.model.CalculadoraModel;
 
 public class CalculadoraController {
+
+    @FXML
+    private TextField limSuperiorField, limInferiorField;
     @FXML
     private Label labelErroDerivada, labelErroIntegral;
 
@@ -43,8 +49,8 @@ public class CalculadoraController {
         integralSaidaPrimeiraOrdem.setVisible(false);
         integralSaidaSegundaOrdem.setVisible(false);
         integralSaidaSegundaOrdem.setText("");
-        definidaRButton.setOnAction(e -> radioClicado(true));
-        indefinidaRButton.setOnAction(e -> radioClicado(false));
+        definidaRButton.setOnAction(_ -> radioClicado(true));
+        indefinidaRButton.setOnAction(_ -> radioClicado(false));
         calculadoraModel = new CalculadoraModel();
     }
 
@@ -70,6 +76,11 @@ public class CalculadoraController {
         try {
             String primeira = calculadoraModel.calcularPrimeiraDerivada(expressaoD);
             String segunda = calculadoraModel.calcularSegundaDerivada(expressaoD);
+
+//            ExprEvaluator util = new ExprEvaluator();
+//
+//            IExpr latexExpr = util.eval("TeXForm(" + primeira + ")");
+//            System.out.println(latexExpr);
 
             derivadaSaidaPrimeiraOrdem.setVisible(true);
             derivadaSaidaSegundaOrdem.setVisible(true);

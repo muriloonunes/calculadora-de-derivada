@@ -103,13 +103,13 @@
                         <VBox>
                            <children>
                               <Label text="Limite superior" />
-                              <TextField promptText="Limite superior" styleClass="integral-textfield" />
+                              <TextField fx:id="limSuperiorField" promptText="Limite superior" styleClass="integral-textfield" />
                            </children>
                         </VBox>
                         <VBox>
                            <children>
                               <Label text="Limite inferior" />
-                              <TextField promptText="Limite inferior" styleClass="integral-textfield" />
+                              <TextField fx:id="limInferiorField" promptText="Limite inferior" styleClass="integral-textfield" />
                            </children>
                         </VBox>
                      </children>

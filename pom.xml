@@ -62,6 +62,13 @@
             <version>1.7.5</version>
         </dependency>
 
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/com.proudapes/jlatexmathfx &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.proudapes</groupId>-->
+<!--            <artifactId>jlatexmathfx</artifactId>-->
+<!--            <version>0.3.2</version>-->
+<!--        </dependency>-->
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
