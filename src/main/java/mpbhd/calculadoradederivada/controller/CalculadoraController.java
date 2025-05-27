@@ -31,7 +31,7 @@ public class CalculadoraController {
     private Label derivadaSaidaPrimeiraOrdem, derivadaSaidaSegundaOrdem;
 
     @FXML
-    private Label integralSaidaPrimeiraOrdem, integralSaidaSegundaOrdem;
+    private Label integralSaidaPrimeiraOrdem;
 
     @FXML private HBox limitesHbox;
 
@@ -46,8 +46,6 @@ public class CalculadoraController {
         derivadaSaidaPrimeiraOrdem.setVisible(false);
         derivadaSaidaSegundaOrdem.setVisible(false);
         integralSaidaPrimeiraOrdem.setVisible(false);
-        integralSaidaSegundaOrdem.setVisible(false);
-        integralSaidaSegundaOrdem.setText("");
         definidaRButton.setOnAction(_ -> radioClicado(true));
         indefinidaRButton.setOnAction(_ -> radioClicado(false));
         calculadoraModel = new CalculadoraModel();
@@ -55,30 +53,23 @@ public class CalculadoraController {
 
     @FXML
     protected void onDerivadaButtonClick() {
-        derivadaSaidaPrimeiraOrdem.setVisible(true);
-        derivadaSaidaSegundaOrdem.setVisible(true);
+        derivadaSaidaPrimeiraOrdem.setVisible(false);
+        derivadaSaidaSegundaOrdem.setVisible(false);
+        labelErroDerivada.setVisible(false);
         animarCliqueBotao(Color.CYAN, derivadaButton);
-
-        System.out.println("Derivada clicado");
 
         String expressaoD = derivadaField.getText();
 
         if (expressaoD.isEmpty() || expressaoD.equals(" ")) {
-            labelErroDerivada.setVisible(true);
-            labelErroDerivada.setText("Campo vazio");
+            mostrarErro(labelErroDerivada, "Digite uma função");
             return;
         }
-
-        //aspas do professor ujeverson
-        // "A calculadora tem q fazer derivada implícita (mas não vou cobrar trigonométricas, logarítmicas, ..., somente polinomiais)
-        // e integral definida/indefinida"
 
         try {
             String primeira = calculadoraModel.calcularPrimeiraDerivada(expressaoD);
             String segunda = calculadoraModel.calcularSegundaDerivada(expressaoD);
 
 //            ExprEvaluator util = new ExprEvaluator();
-//
 //            IExpr latexExpr = util.eval("TeXForm(" + primeira + ")");
 //            System.out.println(latexExpr);
 
@@ -87,24 +78,22 @@ public class CalculadoraController {
             derivadaSaidaPrimeiraOrdem.setText("x' = " + primeira);
             derivadaSaidaSegundaOrdem.setText("x'' = " + segunda);
 
-            labelErroDerivada.setVisible(false);
         } catch (Exception e) {
             System.out.println("Erro ao calcular a derivada: " + e.getMessage());
-            labelErroDerivada.setVisible(true);
-            labelErroDerivada.setText("Erro ao calcular a derivada: " + e.getMessage());
+            mostrarErro(labelErroDerivada, e.getMessage());
         }
     }
 
     @FXML
     protected void onIntegralButtonClick() {
         integralSaidaPrimeiraOrdem.setVisible(false);
-        integralSaidaSegundaOrdem.setVisible(false);
+        labelErroIntegral.setVisible(false);
         animarCliqueBotao(Color.GOLDENROD, integralButton);
 
         String expressao = integralField.getText().trim();
 
         if (expressao.isEmpty()) {
-            mostrarErro(labelErroIntegral, "Campo vazio.");
+            mostrarErro(labelErroIntegral, "Digite uma função");
             return;
         }
 
@@ -126,25 +115,26 @@ public class CalculadoraController {
                 }
 
                 resultado = calculadoraModel.calcularIntegralDefinida(expressao, limiteInferior, limiteSuperior);
-                integralSaidaPrimeiraOrdem.setText("∫ definida = " + resultado);
+                integralSaidaPrimeiraOrdem.setText("∫ " +limiteSuperior + ", " + limiteInferior + " = " + resultado);
             } else {
                 resultado = calculadoraModel.calcularIntegralIndef(expressao);
-                integralSaidaPrimeiraOrdem.setText("∫ indefinida = " + resultado + " + C");
+                integralSaidaPrimeiraOrdem.setText("∫ = " + resultado + " + C");
             }
 
             integralSaidaPrimeiraOrdem.setVisible(true);
-            integralSaidaSegundaOrdem.setVisible(false);
-            labelErroIntegral.setVisible(false);
         } catch (Exception e) {
             mostrarErro(labelErroIntegral, "Erro: " + e.getMessage());
         }
     }
 
     private void radioClicado(boolean showLimites) {
+        labelErroIntegral.setVisible(false);
+        integralSaidaPrimeiraOrdem.setVisible(false);
         limitesHbox.setVisible(showLimites);
     }
 
     private void mostrarErro(Label label, String mensagem) {
+        label.setVisible(true);
         label.setText(mensagem);
     }
 

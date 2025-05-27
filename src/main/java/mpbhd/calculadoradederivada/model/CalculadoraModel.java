@@ -1,5 +1,6 @@
 package mpbhd.calculadoradederivada.model;
 
+import org.matheclipse.core.eval.EvalUtilities;
 import org.matheclipse.core.eval.ExprEvaluator;
 import org.matheclipse.core.interfaces.IExpr;
 
@@ -17,8 +18,8 @@ public class CalculadoraModel {
 //    public String calcularDerivadaImplicita(String expressao) {
 //        try {
 //            String derivada = "D(" + expressao + ", x)";
-//            String solucao = "Solve(" + derivada + " == 0, D(y, x))";
-//            return avaliarExpressao(solucao);
+//            String solucao = "Solve(" + expressao + ", {x, y})";
+//            return avaliarExpressao("Solve(2*x - 2*y - y^2 + (-2*x - 2*x*y - 3*y^2)*dy == 0, dy)");
 //        } catch (Exception e) {
 //            throw new RuntimeException("Erro ao calcular derivada implícita.");
 //        }
@@ -43,7 +44,7 @@ public class CalculadoraModel {
 
     private String avaliarExpressao(String entrada) {
         try {
-            IExpr resultado = evaluator.evaluate(entrada);
+            IExpr resultado = evaluator.eval(entrada);
             return resultado.toString();
         } catch (Exception e) {
             throw new RuntimeException("Expressão inválida. Use apenas letras, números e operadores matemáticos como + - * / ^.");
