@@ -58,29 +58,20 @@ public class CalculadoraController {
         labelErroDerivada.setVisible(false);
         animarCliqueBotao(Color.CYAN, derivadaButton);
 
-        String expressaoD = derivadaField.getText();
-
-        if (expressaoD.isEmpty() || expressaoD.equals(" ")) {
+        String expressao = derivadaField.getText().trim();
+        if (expressao.isEmpty()) {
             mostrarErro(labelErroDerivada, "Digite uma função");
             return;
         }
 
         try {
-            String primeira = calculadoraModel.calcularPrimeiraDerivada(expressaoD);
-            String segunda = calculadoraModel.calcularSegundaDerivada(expressaoD);
-
-//            ExprEvaluator util = new ExprEvaluator();
-//            IExpr latexExpr = util.eval("TeXForm(" + primeira + ")");
-//            System.out.println(latexExpr);
-
-            derivadaSaidaPrimeiraOrdem.setVisible(true);
-            derivadaSaidaSegundaOrdem.setVisible(true);
-            derivadaSaidaPrimeiraOrdem.setText("x' = " + primeira);
-            derivadaSaidaSegundaOrdem.setText("x'' = " + segunda);
-
+            if (expressao.contains("=")) {
+                mostrarDerivadaImplicita(expressao);
+            } else {
+                mostrarDerivadas(expressao);
+            }
         } catch (Exception e) {
-            System.out.println("Erro ao calcular a derivada: " + e.getMessage());
-            mostrarErro(labelErroDerivada, e.getMessage());
+            mostrarErro(labelErroDerivada, "Erro ao calcular a derivada: " + e.getMessage());
         }
     }
 
@@ -91,40 +82,57 @@ public class CalculadoraController {
         animarCliqueBotao(Color.GOLDENROD, integralButton);
 
         String expressao = integralField.getText().trim();
-
         if (expressao.isEmpty()) {
             mostrarErro(labelErroIntegral, "Digite uma função");
             return;
         }
-
         if (!definidaRButton.isSelected() && !indefinidaRButton.isSelected()) {
             mostrarErro(labelErroIntegral, "Selecione o tipo de integral (definida ou indefinida).");
             return;
         }
 
         try {
-            String resultado;
-
             if (definidaRButton.isSelected()) {
-                String limiteInferior = limInferiorField.getText().trim();
-                String limiteSuperior = limSuperiorField.getText().trim();
-
-                if (limiteInferior.isEmpty() || limiteSuperior.isEmpty()) {
-                    mostrarErro(labelErroIntegral, "Preencha os limites inferior e superior.");
-                    return;
-                }
-
-                resultado = calculadoraModel.calcularIntegralDefinida(expressao, limiteInferior, limiteSuperior);
-                integralSaidaPrimeiraOrdem.setText("∫ " +limiteSuperior + ", " + limiteInferior + " = " + resultado);
+                mostrarIntegralDefinida(expressao);
             } else {
-                resultado = calculadoraModel.calcularIntegralIndef(expressao);
-                integralSaidaPrimeiraOrdem.setText("∫ = " + resultado + " + C");
+                mostrarIntegralIndefinida(expressao);
             }
-
-            integralSaidaPrimeiraOrdem.setVisible(true);
         } catch (Exception e) {
             mostrarErro(labelErroIntegral, "Erro: " + e.getMessage());
         }
+    }
+
+    private void mostrarDerivadaImplicita(String expressao) {
+        String resultado = calculadoraModel.calcularDerivadaImplicita(expressao);
+        derivadaSaidaPrimeiraOrdem.setText("dy/dx = " + resultado);
+        derivadaSaidaPrimeiraOrdem.setVisible(true);
+    }
+
+    private void mostrarDerivadas(String expressao) {
+        String primeira = calculadoraModel.calcularPrimeiraDerivada(expressao);
+        String segunda = calculadoraModel.calcularSegundaDerivada(expressao);
+        derivadaSaidaPrimeiraOrdem.setText("x' = " + primeira);
+        derivadaSaidaSegundaOrdem.setText("x'' = " + segunda);
+        derivadaSaidaPrimeiraOrdem.setVisible(true);
+        derivadaSaidaSegundaOrdem.setVisible(true);
+    }
+
+    private void mostrarIntegralDefinida(String expressao) {
+        String limInf = limInferiorField.getText().trim();
+        String limSup = limSuperiorField.getText().trim();
+        if (limInf.isEmpty() || limSup.isEmpty()) {
+            mostrarErro(labelErroIntegral, "Preencha os limites inferior e superior.");
+            return;
+        }
+        String resultado = calculadoraModel.calcularIntegralDefinida(expressao, limInf, limSup);
+        integralSaidaPrimeiraOrdem.setText("∫ " + limSup + ", " + limInf + " = " + resultado);
+        integralSaidaPrimeiraOrdem.setVisible(true);
+    }
+
+    private void mostrarIntegralIndefinida(String expressao) {
+        String resultado = calculadoraModel.calcularIntegralIndef(expressao);
+        integralSaidaPrimeiraOrdem.setText("∫ = " + resultado + " + C");
+        integralSaidaPrimeiraOrdem.setVisible(true);
     }
 
     private void radioClicado(boolean showLimites) {
