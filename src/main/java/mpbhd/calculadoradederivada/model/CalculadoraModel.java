@@ -14,24 +14,6 @@ public class CalculadoraModel {
         return avaliarExpressao("D(" + expressao + ", {x, 2})");
     }
 
-//    public String calcularDerivadaImplicita(String expressao) {
-//        try {
-//            String derivada = "D(" + expressao + ", x)";
-//            String solucao = "Solve(" + expressao + ", {x, y})";
-//            return avaliarExpressao("Solve(2*x - 2*y - y^2 + (-2*x - 2*x*y - 3*y^2)*dy == 0, dy)");
-//        } catch (Exception e) {
-//            throw new RuntimeException("Erro ao calcular derivada implícita.");
-//        }
-//    }
-
-    //public String calcularDerivadaImplicita(String expressao) {
-    //    try {
-    //        String derivada = "Solve(D(" + expressao + ", x) + D(" + expressao + ", y)*D(y, x) == 0, D(y, x))";
-    //        return avaliarExpressao(derivada);
-    //    } catch (Exception e) {
-    //        throw new RuntimeException("Erro ao calcular derivada implícita: " + e.getMessage());
-    //    }
-    //}
 
     public String calcularDerivadaImplicita(String expressao) {
         try {
