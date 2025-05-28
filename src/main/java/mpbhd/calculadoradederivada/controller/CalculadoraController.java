@@ -6,11 +6,18 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import mpbhd.calculadoradederivada.model.CalculadoraModel;
+
+import java.io.IOException;
 
 public class CalculadoraController {
     @FXML
@@ -37,6 +44,9 @@ public class CalculadoraController {
     private HBox limitesHbox;
 
     @FXML
+    private ImageView derivadaImageView, integralImageView;
+
+    @FXML
     private RadioButton definidaRButton, indefinidaRButton;
 
     CalculadoraModel calculadoraModel;
@@ -61,6 +71,7 @@ public class CalculadoraController {
         derivadaSaidaPrimeiraOrdem.setVisible(false);
         derivadaSaidaSegundaOrdem.setVisible(false);
         labelErroDerivada.setVisible(false);
+        derivadaImageView.setImage(null);
         animarCliqueBotao(Color.CYAN, derivadaButton);
 
         String expressao = derivadaField.getText().trim();
@@ -84,6 +95,7 @@ public class CalculadoraController {
     protected void onIntegralButtonClick() {
         integralSaidaPrimeiraOrdem.setVisible(false);
         labelErroIntegral.setVisible(false);
+        integralImageView.setImage(null);
         animarCliqueBotao(Color.GOLDENROD, integralButton);
 
         String expressao = integralField.getText().trim();
@@ -109,23 +121,41 @@ public class CalculadoraController {
 
     private void mostrarDerivadaImplicita(String expressao) {
         String resultado = calculadoraModel.calcularDerivadaImplicita(expressao);
-        derivadaSaidaPrimeiraOrdem.setText("dy/dx = " + resultado);
-        derivadaSaidaPrimeiraOrdem.setVisible(true);
+        try {
+            Image img = calculadoraModel.criarDerivadaImplicitaImage(resultado);
+            derivadaImageView.setImage(img);
+        } catch (IOException e) {
+            e.printStackTrace();
+            derivadaSaidaPrimeiraOrdem.setText("dy/dx = " + resultado);
+            derivadaSaidaPrimeiraOrdem.setVisible(true);
+        }
     }
 
     private void mostrarDerivadas(String expressao) {
         String primeira = calculadoraModel.calcularPrimeiraDerivada(expressao);
         String segunda = calculadoraModel.calcularSegundaDerivada(expressao);
         if (primeira.equals("0") && segunda.equals("0") && isFuncaoValida(expressao)) {
-            derivadaSaidaPrimeiraOrdem.setText("x' = " + primeira);
-            derivadaSaidaPrimeiraOrdem.setVisible(true);
+            try {
+                Image img = calculadoraModel.criarDerivadaImage(primeira);
+                derivadaImageView.setImage(img);
+            } catch (IOException e) {
+                e.printStackTrace();
+                derivadaSaidaPrimeiraOrdem.setText("x' = " + primeira);
+                derivadaSaidaPrimeiraOrdem.setVisible(true);
+            }
         } else if (primeira.equals("0") && segunda.equals("0")) {
             throw new ArithmeticException("Digite uma função válida");
         } else {
-            derivadaSaidaPrimeiraOrdem.setText("x' = " + primeira);
-            derivadaSaidaSegundaOrdem.setText("x'' = " + segunda);
-            derivadaSaidaPrimeiraOrdem.setVisible(true);
-            derivadaSaidaSegundaOrdem.setVisible(true);
+            try {
+                Image img = calculadoraModel.criarDerivadaImage(primeira, segunda);
+                derivadaImageView.setImage(img);
+            } catch (IOException e) {
+                e.printStackTrace();
+                derivadaSaidaPrimeiraOrdem.setText("x' = " + primeira);
+                derivadaSaidaSegundaOrdem.setText("x'' = " + segunda);
+                derivadaSaidaPrimeiraOrdem.setVisible(true);
+                derivadaSaidaSegundaOrdem.setVisible(true);
+            }
         }
     }
 
@@ -137,14 +167,26 @@ public class CalculadoraController {
             return;
         }
         String resultado = calculadoraModel.calcularIntegralDefinida(expressao, limInf, limSup);
-        integralSaidaPrimeiraOrdem.setText("∫ " + limSup + ", " + limInf + " = " + resultado);
-        integralSaidaPrimeiraOrdem.setVisible(true);
+        try {
+            Image img = calculadoraModel.criarIntegralImage(expressao, resultado, limSup, limInf);
+            integralImageView.setImage(img);
+        } catch (IOException e) {
+            e.printStackTrace();
+            integralSaidaPrimeiraOrdem.setText("∫ " + limSup + ", " + limInf + " = " + resultado);
+            integralSaidaPrimeiraOrdem.setVisible(true);
+        }
     }
 
     private void mostrarIntegralIndefinida(String expressao) {
         String resultado = calculadoraModel.calcularIntegralIndef(expressao);
-        integralSaidaPrimeiraOrdem.setText("∫ = " + resultado + " + C");
-        integralSaidaPrimeiraOrdem.setVisible(true);
+        try {
+            Image img = calculadoraModel.criarIntegralImage(expressao, resultado);
+            integralImageView.setImage(img);
+        } catch (IOException e) {
+            e.printStackTrace();
+            integralSaidaPrimeiraOrdem.setText("∫ = " + resultado + " + C");
+            integralSaidaPrimeiraOrdem.setVisible(true);
+        }
     }
 
     private boolean isFuncaoValida(String expressao) {

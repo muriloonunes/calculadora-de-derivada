@@ -14,11 +14,11 @@
 }
 
 .label-titulo-integral {
-    -fx-font-size: 18;
+    -fx-font-size: 20;
 }
 
 .label-titulo-derivada {
-    -fx-font-size: 18;
+    -fx-font-size: 20;
 }
 
 .derivada-hbox-calcular {

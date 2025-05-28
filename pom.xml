@@ -6,7 +6,7 @@
 
     <groupId>mpbhd</groupId>
     <artifactId>calculadora-de-derivada</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>calculadora-de-derivada</name>
 
     <properties>
@@ -40,19 +40,12 @@
             <version>11.17.0</version>
         </dependency>
 
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.scilab.forge/jlatexmath &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.scilab.forge</groupId>-->
-<!--            <artifactId>jlatexmath</artifactId>-->
-<!--            <version>1.0.7</version>-->
-<!--        </dependency>-->
-
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/io.github.egormkn/latexview &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>io.github.egormkn</groupId>-->
-<!--            <artifactId>latexview</artifactId>-->
-<!--            <version>0.6.0</version>-->
-<!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.scilab.forge/jlatexmath -->
+        <dependency>
+            <groupId>org.scilab.forge</groupId>
+            <artifactId>jlatexmath</artifactId>
+            <version>1.0.7</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-to-slf4j -->
         <dependency>
@@ -67,13 +60,6 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.5</version>
         </dependency>
-
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/com.proudapes/jlatexmathfx &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.proudapes</groupId>-->
-<!--            <artifactId>jlatexmathfx</artifactId>-->
-<!--            <version>0.3.2</version>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.slf4j</groupId>

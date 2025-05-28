@@ -3,6 +3,8 @@ module mpbhd.calculadoradederivada {
     requires javafx.fxml;
     requires matheclipse.core;
     requires java.desktop;
+    requires jlatexmath;
+    requires org.jetbrains.annotations;
 
     exports mpbhd.calculadoradederivada.view;
     opens mpbhd.calculadoradederivada.view to javafx.fxml;
