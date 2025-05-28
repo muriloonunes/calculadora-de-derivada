@@ -17,7 +17,7 @@ public class CalculadoraApplication extends Application {
         Font.loadFont(Objects.requireNonNull(CalculadoraApplication.class.getResource("/font/Roboto-Regular.ttf")).toExternalForm(), 10);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mpbhd/calculadoradederivada/calculadora.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 740, 560);
+        Scene scene = new Scene(fxmlLoader.load(), 820, 560);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/styles.css")).toExternalForm());
 
         CalculadoraController calculadoraController = fxmlLoader.getController();

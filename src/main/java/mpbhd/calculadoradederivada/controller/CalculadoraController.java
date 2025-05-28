@@ -3,11 +3,9 @@ package mpbhd.calculadoradederivada.controller;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -15,6 +13,8 @@ import javafx.util.Duration;
 import mpbhd.calculadoradederivada.model.CalculadoraModel;
 
 public class CalculadoraController {
+    @FXML
+    private TabPane tabPane;
 
     @FXML
     private TextField limSuperiorField, limInferiorField;
@@ -33,14 +33,19 @@ public class CalculadoraController {
     @FXML
     private Label integralSaidaPrimeiraOrdem;
 
-    @FXML private HBox limitesHbox;
+    @FXML
+    private HBox limitesHbox;
 
-    @FXML private RadioButton definidaRButton, indefinidaRButton;
+    @FXML
+    private RadioButton definidaRButton, indefinidaRButton;
 
     CalculadoraModel calculadoraModel;
 
     @FXML
     private void initialize() {
+        //https://stackoverflow.com/questions/29051225/remove-default-focus-from-textfield-javafx
+        Platform.runLater(() -> tabPane.requestFocus());
+
         labelErroDerivada.setVisible(false);
         labelErroIntegral.setVisible(false);
         derivadaSaidaPrimeiraOrdem.setVisible(false);
@@ -71,7 +76,7 @@ public class CalculadoraController {
                 mostrarDerivadas(expressao);
             }
         } catch (Exception e) {
-            mostrarErro(labelErroDerivada, "Erro ao calcular a derivada: " + e.getMessage());
+            mostrarErro(labelErroDerivada, e.getMessage());
         }
     }
 
@@ -111,10 +116,17 @@ public class CalculadoraController {
     private void mostrarDerivadas(String expressao) {
         String primeira = calculadoraModel.calcularPrimeiraDerivada(expressao);
         String segunda = calculadoraModel.calcularSegundaDerivada(expressao);
-        derivadaSaidaPrimeiraOrdem.setText("x' = " + primeira);
-        derivadaSaidaSegundaOrdem.setText("x'' = " + segunda);
-        derivadaSaidaPrimeiraOrdem.setVisible(true);
-        derivadaSaidaSegundaOrdem.setVisible(true);
+        if (primeira.equals("0") && segunda.equals("0") && isFuncaoValida(expressao)) {
+            derivadaSaidaPrimeiraOrdem.setText("x' = " + primeira);
+            derivadaSaidaPrimeiraOrdem.setVisible(true);
+        } else if (primeira.equals("0") && segunda.equals("0")) {
+            throw new ArithmeticException("Digite uma função válida");
+        } else {
+            derivadaSaidaPrimeiraOrdem.setText("x' = " + primeira);
+            derivadaSaidaSegundaOrdem.setText("x'' = " + segunda);
+            derivadaSaidaPrimeiraOrdem.setVisible(true);
+            derivadaSaidaSegundaOrdem.setVisible(true);
+        }
     }
 
     private void mostrarIntegralDefinida(String expressao) {
@@ -133,6 +145,15 @@ public class CalculadoraController {
         String resultado = calculadoraModel.calcularIntegralIndef(expressao);
         integralSaidaPrimeiraOrdem.setText("∫ = " + resultado + " + C");
         integralSaidaPrimeiraOrdem.setVisible(true);
+    }
+
+    private boolean isFuncaoValida(String expressao) {
+        try {
+            Integer.parseInt(expressao);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private void radioClicado(boolean showLimites) {

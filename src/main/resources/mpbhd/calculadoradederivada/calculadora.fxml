@@ -12,19 +12,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPainel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpbhd.calculadoradederivada.controller.CalculadoraController">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mpbhd.calculadoradederivada.controller.CalculadoraController">
   <tabs>
     <Tab text="Derivada">
          <content>
             <VBox spacing="15.0" styleClass="derivada-vbox-root">
                <children>
                   <Label styleClass="label-titulo-derivada" text="Calcular derivada" />
-                  <HBox alignment="BOTTOM_CENTER" spacing="10.0" styleClass="derivada-hbox-calcular">
+                  <HBox alignment="BOTTOM_CENTER" spacing="5.0" styleClass="derivada-hbox-calcular">
                      <children>
                         <VBox HBox.hgrow="ALWAYS">
                            <children>
                               <Label styleClass="label-funcao-derivada" text="Função" />
-                              <TextField fx:id="derivadaField" maxHeight="1.7976931348623157E308" styleClass="derivada-textfield" />
+                              <TextField fx:id="derivadaField" maxHeight="1.7976931348623157E308" promptText="3x^2+2x" styleClass="derivada-textfield" />
                            </children>
                         </VBox>
                         <Button fx:id="derivadaButton" defaultButton="true" mnemonicParsing="false" onAction="#onDerivadaButtonClick" styleClass="derivada-button" text="Calcular" />
@@ -47,7 +47,7 @@
                         <RadioButton mnemonicParsing="false" text="Indefinida" toggleGroup="$tipoFuncaoGroup1" />
                      </children>
                   </HBox>
-                  <VBox prefWidth="100.0" spacing="15.0" styleClass="derivada-resposta-vbox" VBox.vgrow="ALWAYS">
+                  <VBox fx:id="derivadaRespostaVbox" prefWidth="100.0" spacing="15.0" styleClass="derivada-resposta-vbox" VBox.vgrow="ALWAYS">
                      <children>
                         <Label fx:id="derivadaSaidaPrimeiraOrdem" styleClass="label-resposta-derivada" text="x' = 3x² + 5" />
                         <Label fx:id="derivadaSaidaSegundaOrdem" layoutX="10.0" layoutY="10.0" styleClass="label-resposta-derivada" text="x'' = 6x" />
@@ -77,7 +77,7 @@
                               <VBox HBox.hgrow="ALWAYS">
                                  <children>
                                     <Label styleClass="label-funcao-integral" text="Função" />
-                                    <TextField fx:id="integralField" maxHeight="1.7976931348623157E308" styleClass="integral-textfield" />
+                                    <TextField fx:id="integralField" maxHeight="1.7976931348623157E308" promptText="3x^2 + x" styleClass="integral-textfield" />
                                  </children>
                               </VBox>
                               <Button fx:id="integralButton" mnemonicParsing="false" onAction="#onIntegralButtonClick" styleClass="integral-button" text="Calcular" />
